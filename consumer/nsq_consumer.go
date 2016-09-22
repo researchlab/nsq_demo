@@ -3,6 +3,7 @@ package consumer
 import (
 	"fmt"
 	"github.com/nsqio/go-nsq"
+	"github.com/researchlab/nsq_demo/libs"
 	"os"
 	"sync"
 	"time"
@@ -24,29 +25,10 @@ func doWork(msg *nsq.Message) error {
 	return nil
 }
 
-func checkStrEmpty(args ...string) (int, bool) {
-	for k, val := range args {
-		if 0 == len(val) {
-			return k, false
-		}
-	}
-	return -1, true
-}
-
-func checkIntZero(args ...int) (int, bool) {
-	for k, val := range args {
-		if 0 > val {
-			return k, false
-		}
-	}
-
-	return -1, true
-}
-
 //desc: universal consumer msg function
 func ConsumerMsg(topicName, channelName, lookupAddr string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	if k, ok := checkStrEmpty(topicName, channelName, lookupAddr); !ok {
+	if k, ok := libs.CheckStrEmpty(topicName, channelName, lookupAddr); !ok {
 		fmt.Printf("args[%d] is null", k)
 		os.Exit(1)
 	}
@@ -77,11 +59,11 @@ func ConsumerMsg(topicName, channelName, lookupAddr string, wg *sync.WaitGroup) 
 //desc: consumer the given number msg
 //@return  the total exec_time of consumer all msg.
 func ConsumerGMsg(topicName, channelName, lookupAddr string, msgNum int) (exec_time float64) {
-	if k, ok := checkStrEmpty(topicName, channelName, lookupAddr); !ok {
+	if k, ok := libs.CheckStrEmpty(topicName, channelName, lookupAddr); !ok {
 		fmt.Printf("args[%d] is null", k)
 		os.Exit(1)
 	}
-	if k, ok := checkIntZero(msgNum); !ok {
+	if k, ok := libs.CheckIntZero(msgNum); !ok {
 		fmt.Printf("args[%d] is null", k)
 		os.Exit(1)
 
