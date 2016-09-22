@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	TOPICNAME_LIST   = []string{"p_events", "s_events"}
+	TOPICNAME_LIST   = []string{"p_events", "s_events", "weixin_events"}
 	CHANNELNAME_LIST = []string{"encode", "decode", "dev1.0-info"}
 )
 
