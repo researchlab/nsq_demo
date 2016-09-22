@@ -32,7 +32,7 @@ func (np *NProducer) ProducerCon() {
 	}
 }
 
-//Publish 同步发送一条消息给指定的topic, 发送失败则返回错误，否在返回nil
+//Publish 同步发送一条消息给指定的topic, 发送失败则返回错误，否则返回nil
 func (np *NProducer) ProducerPub(topicName, msgStr string) {
 	defer func() {
 		if err := recover(); nil != err {
@@ -45,7 +45,7 @@ func (np *NProducer) ProducerPub(topicName, msgStr string) {
 	}
 	if err := p_global.Publish(topicName, []byte(msgStr)); err != nil {
 		fmt.Println("[Error] nsq.Publish msgStr=", msgStr)
-		panic(err)
+		//panic(err)
 	}
 }
 
