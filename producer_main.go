@@ -16,11 +16,35 @@ var (
 
 func main() {
 
-	np := &producer.NProducer{
+	//	np := &producer.NProducer{
+	//		Nsqd_Tcp_Addr: NSQDTCPADDR,
+	//	}
+	//	np.ProducerCon()
+	//	SProducerPub(np)
+
+	np_v1 := &producer.NProducer_VI{
 		Nsqd_Tcp_Addr: NSQDTCPADDR,
 	}
-	np.ProducerCon()
-	SProducerPub(np)
+	SProducerPub_VI(np_v1)
+
+}
+
+//v1: 串行生成指定数目的消息
+func SProducerPub_VI(np *producer.NProducer_VI) {
+	msg_Num := 100000
+
+	var wg sync.WaitGroup
+	wg_len := len(TOPICNAME_LIST)
+	wg.Add(wg_len)
+	for _, topicName := range TOPICNAME_LIST {
+		go func(np *producer.NProducer_VI, topicName string, msg_Num int, wg *sync.WaitGroup) {
+			msgStr := "Just say hello from:" + topicName
+			np.ProducerPub_VI(topicName, msgStr, msg_Num)
+			wg.Done()
+
+		}(np, topicName, msg_Num, &wg)
+	}
+	wg.Wait()
 }
 
 //串行生成指定数目的消息
