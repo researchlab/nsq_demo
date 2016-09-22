@@ -43,6 +43,7 @@ func SProducerPub(np *producer.NProducer) {
 	wg.Wait()
 }
 
+//在给定并发频率len(msg_cur_Num)下，并发生产消息
 func PProducerPub(np *producer.NProducer) {
 	msg_Num := 1000000
 	msg_cur_Num := 10000

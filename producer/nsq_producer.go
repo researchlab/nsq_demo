@@ -49,7 +49,7 @@ func (np *NProducer) ProducerPub(topicName, msgStr string) {
 	}
 }
 
-//desc 可以在指定并发频率len(p_chan)下，并发向指定的topicName 发送消息
+//desc 可以在指定并发频率len(p_chan)下，向指定的topic并发发送消息
 func (np *NProducer) ProducerPubChan(topicName, msgStr string, wg *sync.WaitGroup, p_chan chan int) {
 	if err := p_global.Publish(topicName, []byte(msgStr)); err != nil {
 		fmt.Println("[Error] nsq.Publish msgStr=", msgStr)
