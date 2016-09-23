@@ -28,7 +28,6 @@ func main() {
 func consumerMsg() {
 	var wg sync.WaitGroup
 	wg_len := len(TOPICNAME_LIST) * len(CHANNELNAME_LIST)
-	fmt.Println("wg_len:", wg_len)
 	wg.Add(wg_len)
 	for _, topicName := range TOPICNAME_LIST {
 		for _, channelName := range CHANNELNAME_LIST {
