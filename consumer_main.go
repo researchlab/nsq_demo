@@ -18,8 +18,13 @@ var (
 )
 
 func main() {
-	consumerGMsg()
+	//consumerGMsg()
 	//consumerMsg()
+	consumerTimeOut()
+}
+
+func consumerTimeOut() {
+	consumer.ConsumerT(TOPICNAME, CHANNELNAME, LOOKUPADDR)
 }
 
 //desc 发起 TOPICNAME_LIST * CHANNELNAME_LIST 个消费者,
